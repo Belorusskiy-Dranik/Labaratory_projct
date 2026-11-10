@@ -1,0 +1,26 @@
+# Visual Studio local settings and caches
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+
+# VS Code settings are personal in this team
+.vscode/
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+
+# Visual C++ build output (root or inside project folders)
+[Dd]ebug/
+[Rr]elease/
+x64/Debug/
+x64/Release/
+x86/Debug/
+x86/Release/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
