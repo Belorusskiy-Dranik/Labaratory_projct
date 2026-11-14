@@ -102,9 +102,7 @@ struct Stud_Rec_Book
     }
 };
 
-
-
-int main()
+void txt_to_bin_converter()
 {
     size_t count_of_subjects = 3;
     Student buf_student;
@@ -160,5 +158,4 @@ int main()
     }
     fout_m.close();
     fin_m.close();
-    return 0;
 }
