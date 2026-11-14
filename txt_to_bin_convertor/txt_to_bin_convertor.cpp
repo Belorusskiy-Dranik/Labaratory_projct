@@ -165,5 +165,5 @@ void txt_to_bin_converter(const std::string& in_path_stud,
 
 int main()
 {
-    txt_to_bin_converter("..\\txt_files\\student.txt", "..\\bin_files\\student.bin", "..\\txt_files\\marks.txt", "..\\bin_files\\marks.bin");
+    std::cout << sizeof(Stud_Rec_Book);
 }
