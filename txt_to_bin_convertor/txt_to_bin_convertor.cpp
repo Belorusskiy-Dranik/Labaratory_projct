@@ -45,43 +45,43 @@ struct Stud_Rec_Book
 {
     size_t group = 0;
     size_t number = 0;
-    char subject_1[6]{};
+//    char subject_1[6]{};
     uint8_t mark_1 = 0;
-    char subject_2[6]{};
+//    char subject_2[6]{};
     uint8_t mark_2 = 0;
-    char subject_3[6]{};
+//    char subject_3[6]{};
     uint8_t mark_3 = 0;
 
-    void write_sudject(size_t number_of_subj, const char* str)
-    {
-        size_t size = strlen(str);
-        switch (number_of_subj)
-        {
-        case 1:
-            for (uint8_t i = 0; i < size; ++i)
-            {
-                subject_1[i] = str[i];
-            }
-            subject_1[size] = 0;
-            break;
-        case 2:
-            for (uint8_t i = 0; i < size; ++i)
-            {
-                subject_2[i] = str[i];
-            }
-            subject_2[size] = 0;
-            break;
-        case 3:
-            for (uint8_t i = 0; i < size; ++i)
-            {
-                subject_3[i] = str[i];
-            }
-            subject_3[size] = 0;
-            break;
-        default:
-            break;
-        }
-    }
+    //void write_sudject(size_t number_of_subj, const char* str)
+    //{
+    //    size_t size = strlen(str);
+    //    switch (number_of_subj)
+    //    {
+    //    case 1:
+    //        for (uint8_t i = 0; i < size; ++i)
+    //        {
+    //            subject_1[i] = str[i];
+    //        }
+    //        subject_1[size] = 0;
+    //        break;
+    //    case 2:
+    //        for (uint8_t i = 0; i < size; ++i)
+    //        {
+    //            subject_2[i] = str[i];
+    //        }
+    //        subject_2[size] = 0;
+    //        break;
+    //    case 3:
+    //        for (uint8_t i = 0; i < size; ++i)
+    //        {
+    //            subject_3[i] = str[i];
+    //        }
+    //        subject_3[size] = 0;
+    //        break;
+    //    default:
+    //        break;
+    //    }
+    //}
 
     void write_mark(size_t number_of_subj, uint8_t mark)
     {
@@ -102,7 +102,10 @@ struct Stud_Rec_Book
     }
 };
 
-void txt_to_bin_converter()
+void txt_to_bin_converter(const std::string& in_path_stud,
+    const std::string& out_path_stud,
+    const std::string& in_path_mark,
+    const std::string& out_path_mark)
 {
     size_t count_of_subjects = 3;
     Student buf_student;
@@ -112,8 +115,8 @@ void txt_to_bin_converter()
 
     setlocale(LC_ALL, "Russian");
 
-    std::ifstream fin_s("..\\txt_files\\student.txt");
-    std::ofstream fout_s("..\\bin_files\\student.bin", std::ios::binary);
+    std::ifstream fin_s(in_path_stud);
+    std::ofstream fout_s(out_path_stud, std::ios::binary);
     while (fin_s.peek() != EOF)
     {
         std::getline(fin_s, buf_str, '\n');
@@ -135,8 +138,8 @@ void txt_to_bin_converter()
     fin_s.close();
 
 
-    std::ifstream fin_m("..\\txt_files\\marks.txt");
-    std::ofstream fout_m("..\\bin_files\\marks.bin", std::ios::binary);
+    std::ifstream fin_m(in_path_mark);
+    std::ofstream fout_m(out_path_mark, std::ios::binary);
 
     while (fin_m.peek() != EOF)
     {
@@ -147,9 +150,9 @@ void txt_to_bin_converter()
         buf_srb.number = atoi(buf_str.substr(pos + 1, next_pos - pos - 1).c_str());
         for (uint8_t i = 1; i <= count_of_subjects; ++i)
         {
-            pos = next_pos;
-            next_pos = buf_str.find_first_of(';', pos + 1);
-            buf_srb.write_sudject(i, buf_str.substr(pos + 1, next_pos - pos - 1).c_str());
+            //pos = next_pos;
+            //next_pos = buf_str.find_first_of(';', pos + 1);
+            //buf_srb.write_sudject(i, buf_str.substr(pos + 1, next_pos - pos - 1).c_str());
             pos = next_pos;
             next_pos = buf_str.find_first_of(';', pos + 1);
             buf_srb.write_mark(i, atoi(buf_str.substr(pos + 1, next_pos - pos - 1).c_str()));
@@ -158,4 +161,9 @@ void txt_to_bin_converter()
     }
     fout_m.close();
     fin_m.close();
+}
+
+int main()
+{
+    txt_to_bin_converter("..\\txt_files\\student.txt", "..\\bin_files\\student.bin", "..\\txt_files\\marks.txt", "..\\bin_files\\marks.bin");
 }
