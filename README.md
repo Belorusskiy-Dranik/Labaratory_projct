@@ -7,6 +7,7 @@ struct Student
     char name[12]{};
     char patronymic[22]{};
 }
+size 64 bits
 
 struct Stud_Rec_Book
 {
@@ -19,3 +20,4 @@ struct Stud_Rec_Book
     char subject_3[6]{};
     uint8_t mark_3 = 0;
 }
+size 64 bits
