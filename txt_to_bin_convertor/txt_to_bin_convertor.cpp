@@ -162,8 +162,3 @@ void txt_to_bin_converter(const std::string& in_path_stud,
     fout_m.close();
     fin_m.close();
 }
-
-int main()
-{
-    std::cout << sizeof(Stud_Rec_Book);
-}
