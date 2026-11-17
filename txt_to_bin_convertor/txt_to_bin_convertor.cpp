@@ -11,7 +11,7 @@ struct Student
 
     void operator<< (const char* str)
     {
-        size_t size = strlen(str);
+        size_t size = std::min(strlen(str), sizeof(surname) - 1);
         if (str[0] != ';')
         {
             for (size_t i = 0; i < size - 1; ++i)
@@ -83,7 +83,7 @@ struct Stud_Rec_Book
     //    }
     //}
 
-    void write_mark(size_t number_of_subj, uint8_t mark)
+    void write_mark(uint8_t number_of_subj, uint8_t mark)
     {
         switch (number_of_subj)
         {
@@ -107,7 +107,7 @@ void txt_to_bin_converter(const std::string& in_path_stud,
     const std::string& in_path_mark,
     const std::string& out_path_mark)
 {
-    size_t count_of_subjects = 3;
+    uint8_t count_of_subjects = 3;
     Student buf_student;
     std::string buf_str;
     Stud_Rec_Book buf_srb;
@@ -150,8 +150,8 @@ void txt_to_bin_converter(const std::string& in_path_stud,
         buf_srb.number = atoi(buf_str.substr(pos + 1, next_pos - pos - 1).c_str());
         for (uint8_t i = 1; i <= count_of_subjects; ++i)
         {
-            //pos = next_pos;
-            //next_pos = buf_str.find_first_of(';', pos + 1);
+            pos = next_pos;
+            next_pos = buf_str.find_first_of(';', pos + 1);
             //buf_srb.write_sudject(i, buf_str.substr(pos + 1, next_pos - pos - 1).c_str());
             pos = next_pos;
             next_pos = buf_str.find_first_of(';', pos + 1);
@@ -161,4 +161,12 @@ void txt_to_bin_converter(const std::string& in_path_stud,
     }
     fout_m.close();
     fin_m.close();
+}
+
+int main()
+{
+    txt_to_bin_converter("..\\txt_files\\student.txt",
+        "..\\bin_files\\student.bin",
+        "..\\txt_files\\marks.txt",
+        "..\\bin_files\\marks.bin");
 }
