@@ -7,11 +7,11 @@ struct Student
     size_t number = 0;
     char surname[22]{};
     char name[12]{};
-    char patronymic[22]{};
+    char patronymic[30]{};
 
     void operator<< (const char* str)
     {
-        size_t size = std::min(strlen(str), sizeof(surname) - 1);
+        size_t size = strlen(str);
         if (str[0] != ';')
         {
             for (size_t i = 0; i < size - 1; ++i)
@@ -27,7 +27,9 @@ struct Student
                 for (size_t i = 1; i <= size; ++i)
                 {
                     patronymic[i - 1] = str[i];
+
                 }
+                patronymic[size] = 0;
             }
             else
             {

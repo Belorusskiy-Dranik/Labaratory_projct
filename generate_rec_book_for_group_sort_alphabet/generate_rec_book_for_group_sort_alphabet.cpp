@@ -7,7 +7,7 @@ struct Student{
     size_t number = 0;
     char surname[22]{};
     char name[12]{};
-    char patronymic[22]{};
+    char patronymic[30]{};
 };
 
 struct Rec_Book{
