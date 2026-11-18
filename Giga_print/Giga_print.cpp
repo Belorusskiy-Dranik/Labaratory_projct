@@ -66,7 +66,7 @@ void kazarma_sort(const std::string& in_path)
     size_t m_1 = finit.tellg();
     finit.seekg(0);
     size_t m_2 = finit.tellg();
-    size_t size = (m_1 - m_2) / sizeof(Zek);
+    size_t size = (m_1 - m_2) / sizeof(T);
     finit.seekp(0);
     for (size_t i = 0; i + 1 < size; ++i)
     {
@@ -75,16 +75,16 @@ void kazarma_sort(const std::string& in_path)
         finit.seekp(0, std::ios::beg);
         for (size_t j = 0; j + 1 < size - i; ++j)
         {
-            finit.seekg(j * ((int)sizeof(Zek)), std::ios::beg);
-            finit.read((char*)&zek_1, sizeof(Zek));
-            finit.read((char*)&zek_2, sizeof(Zek));
+            finit.seekg(j * ((int)sizeof(T)), std::ios::beg);
+            finit.read((char*)&zek_1, sizeof(T));
+            finit.read((char*)&zek_2, sizeof(T));
 
 
             if (before(zek_1, zek_2))
             {
-                finit.seekp(j * ((int)sizeof(Zek)), std::ios::beg);
-                finit.write((const char*)&zek_2, sizeof(Zek));
-                finit.write((const char*)&zek_1, sizeof(Zek));
+                finit.seekp(j * ((int)sizeof(T)), std::ios::beg);
+                finit.write((const char*)&zek_2, sizeof(T));
+                finit.write((const char*)&zek_1, sizeof(T));
                 finit.flush();
             }
         }
@@ -131,7 +131,7 @@ void giga_print(const std::string& marks_with_surname_bin_path,
     std::ifstream finit_2(aver_marks_bin_path, std::ios::binary);
     std::ofstream fonit_2(aver_marks_txt_path);
 
-    kazarma_sort<Stud_Rec_Book>(aver_marks_bin_path);
+    kazarma_sort<Stud_Rec_Book_with_aver_marks>(aver_marks_bin_path);
 
     std::cout << "Student_Record_Book_with_average_marks:\n";
     while (finit_2.read((char*)&SRB_wam, sizeof(SRB_wam)))
@@ -183,7 +183,7 @@ void giga_print(const std::string& marks_with_surname_bin_path,
     std::ifstream finit_4(sorted_SRB_by_aver_marks_bin_path, std::ios::binary);
     std::ofstream fonit_4(sorted_SRB_by_aver_marks_txt_path);
 
-    kazarma_sort<Stud_Rec_Book>(sorted_SRB_by_aver_marks_bin_path);
+    kazarma_sort<Stud_Rec_Book_with_aver_marks>(sorted_SRB_by_aver_marks_bin_path);
 
     std::cout << "Student_Record_Book_sorted_by_average_marks:\n";
     while (finit_4.read((char*)&SRB_wam, sizeof(SRB_wam)))
@@ -210,7 +210,7 @@ void giga_print(const std::string& marks_with_surname_bin_path,
     std::ifstream finit_5(kazarma_bin_path, std::ios::binary);
     std::ofstream fonit_5(kazarma_txt_path);
 
-    kazarma_sort<Stud_Rec_Book>(kazarma_bin_path);
+    kazarma_sort<Zek>(kazarma_bin_path);
 
     std::cout << "Na_Kazarme:\n";
     while (finit_5.read((char*)&zek, sizeof(zek)))
@@ -228,7 +228,7 @@ void giga_print(const std::string& marks_with_surname_bin_path,
     std::ifstream finit_6(zadrot_list_bin_path, std::ios::binary);
     std::ofstream fonit_6(zadrot_list_txt_path);
 
-    kazarma_sort<Stud_Rec_Book>(zadrot_list_bin_path);
+    kazarma_sort<Zek>(zadrot_list_bin_path);
 
     std::cout << "List_Lyudey_S_Povishkoi:\n";
     while (finit_6.read((char*)&zek, sizeof(zek)))
