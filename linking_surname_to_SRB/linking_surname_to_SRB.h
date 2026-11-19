@@ -1,7 +1,6 @@
-#include <fstream>
-#include <iostream>
+#pragma once
+
 #include <string>
-#include <cstdint>
 
 void linking_surname_to_SRB( const std::string& in_path_stud, 
     const std::string& in_path_rec_book, 

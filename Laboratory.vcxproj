@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{04bc9f49-3688-4ac6-a61b-ecdccff2b063}</ProjectGuid>
-    <RootNamespace>txttobinconvertor</RootNamespace>
+    <ProjectGuid>{40B3C2F2-23EF-49D0-A691-4291ACD9CF8F}</ProjectGuid>
+    <RootNamespace>Laboratory</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,6 +76,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,6 +92,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +106,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,14 +122,43 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <PropertyGroup>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="txt_to_bin_convertor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CalAveBal\CalAveBal\CalAveBal.cpp" />
+    <ClCompile Include="Giga_print\Giga_print.cpp" />
+    <ClCompile Include="Kazarma_Check\Kazarma_Check.cpp" />
+    <ClCompile Include="Kazarma_sort\Kazarma_sort.cpp" />
+    <ClCompile Include="Task_F\Task_F.cpp" />
+    <ClCompile Include="Zadrot_List\Zadrot_List.cpp" />
+    <ClCompile Include="generate_rec_book_for_group_sort_alphabet\generate_rec_book_for_group_sort_alphabet.cpp" />
+    <ClCompile Include="linking_surname_to_SRB\linking_surname_to_SRB.cpp" />
+    <ClCompile Include="task_H.cpp\taskH.cpp" />
+    <ClCompile Include="txt_to_bin_convertor\txt_to_bin_convertor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CalAveBal\CalAveBal\CalAveBal.h" />
+    <ClInclude Include="Giga_print\Giga_print.h" />
+    <ClInclude Include="Kazarma_Check\Kazarma_Check.h" />
+    <ClInclude Include="Kazarma_sort\Kazarma_sort.h" />
+    <ClInclude Include="Task_F\Task_F.h" />
+    <ClInclude Include="Zadrot_List\Zadrot_List.h" />
+    <ClInclude Include="generate_rec_book_for_group_sort_alphabet\generate_rec_book_for_group_sort_alphabet.h" />
+    <ClInclude Include="linking_surname_to_SRB\linking_surname_to_SRB.h" />
+    <ClInclude Include="task_H.cpp\taskH.h" />
+    <ClInclude Include="txt_to_bin_convertor\txt_to_bin_convertor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

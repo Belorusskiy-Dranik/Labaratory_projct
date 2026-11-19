@@ -1,4 +1,5 @@
-﻿#include <iostream>
+#include <cstring>
+#include <iostream>
 #include <fstream>
 #include <iomanip>
 struct Zek
@@ -11,6 +12,8 @@ struct Zek
 void kazarma_print(const std::string& path)
 {
     std::ifstream fin(path, std::ios::binary);
+    if (!fin)
+        throw "Cannot open list for printing.";
 
     std::cout << std::left
         << std::setw(24) << "surname"
@@ -26,10 +29,4 @@ void kazarma_print(const std::string& path)
             << std::setw(10) << z.number << '\n';
         ++i;
     }
-}
-
-
-int main()
-{
-    std::cout << "Hello World!\n";
 }
