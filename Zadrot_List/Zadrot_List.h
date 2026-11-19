@@ -1,6 +1,5 @@
-#include <iostream>
-#include <fstream>
+#pragma once
+
 #include <string>
-#include <cstdint>
 
 void Zadrot_List(const std::string& inpath, const std::string& outpath);

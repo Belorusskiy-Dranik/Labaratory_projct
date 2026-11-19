@@ -1,5 +1,5 @@
-#include <iostream>
-#include <fstream>
+#pragma once
+
 #include <string>
 
 void txt_to_bin_converter(const std::string& in_path_stud,

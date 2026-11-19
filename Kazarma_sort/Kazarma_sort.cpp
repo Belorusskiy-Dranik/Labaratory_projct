@@ -1,4 +1,5 @@
-﻿#include <iostream>
+#include <cstring>
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -9,7 +10,7 @@ struct Zek
     size_t number = 0;
 };
 
-bool before(Zek const& zek_1, Zek const& zek_2)
+static bool before(Zek const& zek_1, Zek const& zek_2)
 {
     if (zek_1.group == zek_2.group)
     {
@@ -21,12 +22,14 @@ bool before(Zek const& zek_1, Zek const& zek_2)
 void kazarma_sort(const std::string& in_path)
 {
     std::fstream finit(in_path, std::ios::out | std::ios::binary | std::ios::in);
-    if (!finit) return;
+    if (!finit) throw "Cannot open list for sorting.";
     Zek zek_1, zek_2;
     finit.seekg(0, std::ios::end);
     size_t m_1 = finit.tellg();
     finit.seekg(0);
     size_t m_2 = finit.tellg();
+    if ((m_1 - m_2) % sizeof(Zek) != 0)
+        throw "Incomplete student list record.";
     size_t size = (m_1 - m_2) / sizeof(Zek);
     finit.seekp(0);
     for (size_t i = 0; i + 1 < size; ++i)
@@ -51,6 +54,8 @@ void kazarma_sort(const std::string& in_path)
         }
     }
     finit.close();
+    if (!finit)
+        throw "Cannot sort student list.";
 }
 
 //"..\\bin_files\\marks.bin"

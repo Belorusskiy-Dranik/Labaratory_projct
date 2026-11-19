@@ -27,11 +27,13 @@ struct Stud_Rec_Book{
     uint8_t mark_3 = 0;
 };
 
-size_t group_size( 
+static size_t group_size(
     const std::string& in_path_rec_book,
     const size_t group){
 
     std::ifstream fin_rec_book(in_path_rec_book, std::ios::binary);
+    if (!fin_rec_book)
+        throw "Cannot open group marks.";
     Rec_Book a;
     size_t counter = 0;
     while(fin_rec_book.read((char*) &a, sizeof(Rec_Book)) ){
@@ -43,20 +45,22 @@ size_t group_size(
     return counter;
 }
 
-bool compare(Stud_Rec_Book const& Stud_Rec_Book_1, Stud_Rec_Book const& Stud_Rec_Book_2)
+static bool compare(Stud_Rec_Book const& Stud_Rec_Book_1, Stud_Rec_Book const& Stud_Rec_Book_2)
 {
-    return strcmp(Stud_Rec_Book_1.surname, Stud_Rec_Book_2.surname) < 0;
+    return strcmp(Stud_Rec_Book_1.surname, Stud_Rec_Book_2.surname) > 0;
 }
 
-void sort(const std::string& in_path)
+static void sort(const std::string& in_path)
 {
     std::fstream finit(in_path, std::ios::out | std::ios::binary | std::ios::in);
-    if (!finit) return;
+    if (!finit) throw "Cannot open group report for sorting.";
     Stud_Rec_Book Stud_Rec_Book_1, Stud_Rec_Book_2;
     finit.seekg(0, std::ios::end);
     size_t m_1 = finit.tellg();
     finit.seekg(0);
     size_t m_2 = finit.tellg();
+    if ((m_1 - m_2) % sizeof(Stud_Rec_Book) != 0)
+        throw "Incomplete group report record.";
     size_t size = (m_1 - m_2) / sizeof(Stud_Rec_Book);
     finit.seekp(0);
     for (size_t i = 0; i + 1 < size; ++i)
@@ -95,24 +99,31 @@ void generate_rec_book_for_group_sort_alphabet(
     std::ofstream fout(out_path, std::ios::binary);
 
 
+    if (!fin_stud || !fin_rec_book || !fout)
+        throw "Cannot open files for group report.";
+    if (group_size(in_path_rec_book, group) == 0)
+    {
+        fout.close();
+        return;
+    }
+
     Student a;
     Rec_Book b;
+    Stud_Rec_Book c;
 
     while(fin_stud.read((char*) &a, sizeof(Student)) ){
 
-        if(a.number != group){
-            continue;
-        }
-
         while(fin_rec_book.read((char*) &b, sizeof(Rec_Book) )){
 
-            if(a.number == b.number){
-                fout.write( (const char*) &b.group, sizeof(b.group));
-                fout.write( (const char*) &a.surname, sizeof(a.surname));
-                fout.write( (const char*) &b.number, sizeof(b.number));
-                fout.write( (const char*) &b.mark_1, sizeof(b.mark_1));
-                fout.write( (const char*) &b.mark_2, sizeof(b.mark_2));
-                fout.write( (const char*) &b.mark_3, sizeof(b.mark_3));
+            if(a.number == b.number && b.group == group){
+                c.group = b.group;
+                for (size_t i = 0; i < sizeof(c.surname); ++i)
+                    c.surname[i] = a.surname[i];
+                c.number = b.number;
+                c.mark_1 = b.mark_1;
+                c.mark_2 = b.mark_2;
+                c.mark_3 = b.mark_3;
+                fout.write((const char*)&c, sizeof(c));
 
                 break;
             }
@@ -121,6 +132,6 @@ void generate_rec_book_for_group_sort_alphabet(
         fin_rec_book.seekg(0);
     }
 
+    fout.close();
     sort(out_path);
-
 }

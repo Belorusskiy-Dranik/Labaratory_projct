@@ -1,6 +1,5 @@
-#include <iostream>
-#include <fstream>
+#pragma once
+
 #include <string>
-#include <cstdint>
 
 void Kazarma_Check(const std::string& inpath, const std::string& outpath);
