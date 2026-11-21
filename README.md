@@ -1,11 +1,5 @@
 # Labaratory_projct
 
-`main.cpp` запускает пункты A–I и текстовый экспорт.
-
-Откройте `Laboratory.sln` в Visual Studio 2022, выберите `Debug` и `x64`, затем нажмите Ctrl+F5. Все исходные файлы подключены в проект `Laboratory.vcxproj`, стандарт языка — C++17.
-
-Собранная программа находится в `bin/x64/Debug/Laboratory.exe`. При запуске из терминала рабочей папкой должна быть папка с `Laboratory.sln`.
-
 Номер группы задаётся в `main.cpp` строкой `int group = 4;`.
 
 Исходные `txt_files/student.txt` и `txt_files/marks.txt` записаны в Windows-1251. Бинарные результаты сохраняются в `bin_files`. Структуры записей объявлены в исходных файлах модулей. В сборке x64 размеры `Student`, `Rec_Book`, `Stud_Rec_Book`, `Stud_Rec_Book_with_aver_marks` и `Zek` составляют 72, 24, 48, 56 и 40 байт соответственно.
